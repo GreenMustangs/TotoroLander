@@ -1,1 +1,11 @@
-asdf
+import java.awt.Image;
+
+
+public class Totoro extends MovingImage{
+
+	public Totoro(int x, int y) {
+		super("totoro.png",x,y,50,100);
+	}
+
+	
+}
