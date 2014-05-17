@@ -1,0 +1,21 @@
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+public class TotoroApp extends JPanel{
+
+	public static void main(String[] args)
+	{
+		JFrame w = new JFrame("Simple Window");
+	    w.setBounds(100, 100, 640, 480);
+	    w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    
+	    StartPanel panel1 = new StartPanel();
+	    w.add(panel1);
+	    w.setResizable(true);
+	    w.setVisible(true);
+	    
+	}
+}
