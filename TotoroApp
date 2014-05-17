@@ -1,21 +1,61 @@
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+	
+public class TotoroApp extends JFrame {
+	  
+	
+	
+	  // public static boolean IsOnStart = IsOn1;
+	 // public static boolean IsOnGame = false;
+	StartPanel startPanel;
+	 TreeBackground gamePanel;
 
-public class TotoroApp extends JPanel{
+	/**
+	 * @param title
+	 * @throws HeadlessException
+	 */
+	public TotoroApp(String title) throws HeadlessException {
+		super(title);
+		
+		this.setBounds(0, 0, 640 * 3, 480 * 3);
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setResizable(true);
+	    this.setLayout(new BorderLayout());
+	    this.setVisible(true);
+		
+
+		startPanel = new StartPanel(this);
+	    this.add(startPanel, BorderLayout.CENTER);
+	   //  startPanel.setBounds(0, 0, 640 * 3, 480 * 3);
+	  //   this.setResizable(true);
+	    startPanel.setVisible(true);
+	//    startPanel.setPreferredSize(new Dimension(640 * 3, 480 * 3));
+	    
+	    gamePanel = new TreeBackground();
+	    this.add(gamePanel, BorderLayout.CENTER);
+       //  this.setResizable(true);
+	    // gamePanel.setBounds(0, 0, 640 * 3, 480 * 3);
+	    gamePanel.setVisible(false);
+		
+	}
+	
+	// make treeBackground visible
+	public void showBackground () {
+		startPanel.setVisible(false);
+		gamePanel.setVisible(true);
+	}
 
 	public static void main(String[] args)
-	{
-		JFrame w = new JFrame("Simple Window");
-	    w.setBounds(100, 100, 640, 480);
-	    w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    
-	    StartPanel panel1 = new StartPanel();
-	    w.add(panel1);
-	    w.setResizable(true);
-	    w.setVisible(true);
-	    
-	}
+	  {
+	    JFrame w = new TotoroApp("TotoroApp");
+	   
+	  }
 }
