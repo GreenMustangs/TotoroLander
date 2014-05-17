@@ -39,6 +39,8 @@ public class InstructionsPanel extends JPanel
 	  this.downArrowKey = (new ImageIcon("arrowkey2.png")).getImage();
 	  this.leftArrowKey = (new ImageIcon("arrowkey3.png")).getImage();
 	  this.rightArrowKey = (new ImageIcon("arrowkey4.png")).getImage();
+	  
+	  setBackground(Color.ORANGE);
   }
 
   public void paintComponent(Graphics g)
@@ -47,6 +49,12 @@ public class InstructionsPanel extends JPanel
 
     int width = getWidth();
     int height = getHeight();
+    
+    g.drawImage(arrowKeys, width/2 ,height/2,  width/4, height/4, this); 
+  }
+
+}
+
   }
 
 }
