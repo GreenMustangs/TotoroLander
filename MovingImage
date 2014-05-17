@@ -27,8 +27,9 @@ public class MovingImage {
 		this.y = y;
 	}
 	
-	public void moveByAmount(int x) {
+	public void moveByAmount(int x, int y) {
 		this.x += x;
+		this.y += y;
 	}
 	
 	public void applyWindowLimits(int windowWidth, int windowHeight) {
