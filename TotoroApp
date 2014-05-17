@@ -1,5 +1,4 @@
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
+  import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
@@ -16,7 +15,8 @@ public class TotoroApp extends JFrame {
 	  // public static boolean IsOnStart = IsOn1;
 	 // public static boolean IsOnGame = false;
 	StartPanel startPanel;
-	 TreeBackground gamePanel;
+	TreeBackground gamePanel;
+	InstructionsPanel instructionsPanel;
 
 	/**
 	 * @param title
@@ -34,16 +34,16 @@ public class TotoroApp extends JFrame {
 
 		startPanel = new StartPanel(this);
 	    this.add(startPanel, BorderLayout.CENTER);
-	   //  startPanel.setBounds(0, 0, 640 * 3, 480 * 3);
-	  //   this.setResizable(true);
 	    startPanel.setVisible(true);
-	//    startPanel.setPreferredSize(new Dimension(640 * 3, 480 * 3));
+	//    startPanel.setPreferredSize(new Dimension(640 * 3, 480 * 3)); 
 	    
 	    gamePanel = new TreeBackground();
 	    this.add(gamePanel, BorderLayout.CENTER);
-       //  this.setResizable(true);
-	    // gamePanel.setBounds(0, 0, 640 * 3, 480 * 3);
-	    gamePanel.setVisible(false);
+	    gamePanel.setVisible(false); 
+	    
+	   /*  instructionsPanel = new InstructionsPanel();
+	    this.add(instructionsPanel, BorderLayout.CENTER);
+	    instructionsPanel.setVisible(true); */
 		
 	}
 	
@@ -51,6 +51,7 @@ public class TotoroApp extends JFrame {
 	public void showBackground () {
 		startPanel.setVisible(false);
 		gamePanel.setVisible(true);
+		System.out.println("showBackground");
 	}
 
 	public static void main(String[] args)
