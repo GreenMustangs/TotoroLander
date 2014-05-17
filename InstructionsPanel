@@ -1,0 +1,52 @@
+import java.awt.*;
+
+import javax.swing.*;
+
+/**
+ * 
+   TODO Write a one-sentence summary of your class here.
+   TODO Follow it with additional details about its purpose, what abstraction
+   it represents, and how to use it.
+
+   @author  TODO Your Name
+   @version TODO Date
+
+   Period - TODO Your Period
+   Assignment - TODO Name of Assignment
+
+   Sources - TODO list collaborators
+ */
+public class InstructionsPanel extends JPanel
+{
+	// from StartPanel, ReultsPanel
+		/* if button is clicked: 
+		 * -Press Down or Up to fight against gravity/ to increase velocity
+		 * -Press left to tilt towards left
+		 * -Press right to tilt towards right
+		 * - Objective: to safely land Totoro on the trees
+		 * */
+	private Image arrowKeys;
+	private Image upArrowKey; // key1
+	private Image downArrowKey;  // key 2
+	private Image leftArrowKey; // key3
+	private Image rightArrowKey; // key4
+
+
+  public InstructionsPanel () {
+	  super();
+	  this.arrowKeys = (new ImageIcon("ArrowKeys.png")).getImage();
+	  this.upArrowKey = (new ImageIcon("arrowkey1.png")).getImage();
+	  this.downArrowKey = (new ImageIcon("arrowkey2.png")).getImage();
+	  this.leftArrowKey = (new ImageIcon("arrowkey3.png")).getImage();
+	  this.rightArrowKey = (new ImageIcon("arrowkey4.png")).getImage();
+  }
+
+  public void paintComponent(Graphics g)
+  {
+    super.paintComponent(g);  // Call JPanel's paintComponent method to paint the background
+
+    int width = getWidth();
+    int height = getHeight();
+  }
+
+}
