@@ -64,7 +64,7 @@ public class TreeBackground extends JPanel implements KeyListener {
 	
 	public static void main(String[] args)
 	  {
-	    JFrame w = new JFrame("Simple Window");
+	    JFrame w = new JFrame("TotoroApp");
 	    w.setBounds(100, 100, 640 * 2, 480 * 2);
 	    w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    TreeBackground panel = new TreeBackground();
