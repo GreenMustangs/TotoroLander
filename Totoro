@@ -3,9 +3,27 @@ import java.awt.Image;
 
 public class Totoro extends MovingImage{
 
+	private double xVel, yVel;
+	
 	public Totoro(int x, int y) {
 		super("totoro.png",x,y,50,100);
 	}
 
+	public void fall(MovingImage platform) {
+		if(!platform.isPointInImage(680 * 3, 480 * 3 - 100))
+		{
+			yVel += 0.2;
+		}
+		else
+		{
+			yVel = 0;
+		}
+		moveByAmount(0, (int)yVel);
+	}
+	
+	public void moveSideways(int dir)
+	{
+		moveByAmount(dir*4, 0);
+	}
 	
 }
