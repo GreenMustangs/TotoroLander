@@ -1,4 +1,5 @@
-  import java.awt.BorderLayout;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
@@ -10,53 +11,43 @@ import javax.swing.JPanel;
 	
 public class TotoroApp extends JFrame {
 	  
-	
-	
-	  // public static boolean IsOnStart = IsOn1;
-	 // public static boolean IsOnGame = false;
 	StartPanel startPanel;
 	TreeBackground gamePanel;
 	InstructionsPanel instructionsPanel;
-
-	/**
-	 * @param title
-	 * @throws HeadlessException
-	 */
+	
 	public TotoroApp(String title) throws HeadlessException {
 		super(title);
 		
-		this.setBounds(0, 0, 640 * 3, 480 * 3);
+		this.setLayout(new CardLayout());
+		this.setBounds(0, 0, 640 * 2, 480 * 2);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setResizable(true);
-	    this.setLayout(new BorderLayout());
 	    this.setVisible(true);
 		
-
 		startPanel = new StartPanel(this);
-	    this.add(startPanel, BorderLayout.CENTER);
-	    startPanel.setVisible(true);
-	//    startPanel.setPreferredSize(new Dimension(640 * 3, 480 * 3)); 
+	    this.add(startPanel, "start");  
 	    
 	    gamePanel = new TreeBackground();
-	    this.add(gamePanel, BorderLayout.CENTER);
-	    gamePanel.setVisible(false); 
+	    this.add(gamePanel, "game"); 
+	   
 	    
-	   /*  instructionsPanel = new InstructionsPanel();
-	    this.add(instructionsPanel, BorderLayout.CENTER);
-	    instructionsPanel.setVisible(true); */
+	    instructionsPanel = new InstructionsPanel();
+	    this.add(instructionsPanel, "instructions"); 
+
 		
 	}
 	
 	// make treeBackground visible
 	public void showBackground () {
-		startPanel.setVisible(false);
-		gamePanel.setVisible(true);
-		System.out.println("showBackground");
+		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
+		cardLayout.show(this.getContentPane(), "game");
+		gamePanel.requestFocusInWindow();
+		gamePanel.startGame();
 	}
 
 	public static void main(String[] args)
 	  {
 	    JFrame w = new TotoroApp("TotoroApp");
-	   
+	  
 	  }
 }
