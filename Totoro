@@ -3,27 +3,80 @@ import java.awt.Image;
 
 public class Totoro extends MovingImage{
 
-	private double xVel, yVel;
+	private int xVel, yVel = 10;
+	private int widthOfScreen = 640 * 2;
+	private int heightOfScreen = 480 * 2;
+	private boolean isLandSafely = false;
+	private boolean isKilled = false;
 	
+
 	public Totoro(int x, int y) {
 		super("totoro.png",x,y,50,100);
 	}
 
 	public void fall(MovingImage platform) {
-		if(!platform.isPointInImage(680 * 3, 480 * 3 - 100))
+		/* if(!platform.isPointInImage(680 * 3, 480 * 3 - 100))
 		{
 			yVel += 0.2;
 		}
 		else
 		{
 			yVel = 0;
+		} */
+		moveByAmount(0, yVel);
+		yVel = yVel + 5;
+		if (getY() < 0) {
+			moveToLocation(getX(), 0);
+			yVel = 10;
 		}
-		moveByAmount(0, (int)yVel);
-	}
-	
+		if (getX() < 0) {
+			moveToLocation( 0 ,getY());
+		} else if (getX() > widthOfScreen) {
+			moveToLocation( widthOfScreen, getY());
+		} 
+		
+	} 
+
 	public void moveSideways(int dir)
 	{
 		moveByAmount(dir*4, 0);
 	}
 	
+	public void goFaster(int amount)
+	{
+		yVel = yVel + amount;
+	}
+	
+	public void goSlower(int amount)
+	{
+		yVel = yVel - amount;
+	}
+	
+	public void reset() {
+		isLandSafely = false;
+		isKilled = false;
+	}
+	
+	public boolean isLandSafely() {
+		return isLandSafely;
+	}
+	
+	public boolean isKilled() {
+		return isKilled;
+	}
+	
+	public boolean checkEndOfGame() {
+		if (getY() > heightOfScreen - TreeBackground.heightOfTree) {
+			if (yVel < 40) {
+				isLandSafely = true;
+				return true;
+			} else {
+				isKilled = true;
+				return true;
+				
+			}
+			
+		}
+		return false;
+	}
 }
