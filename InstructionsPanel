@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.*;
 
@@ -34,13 +35,15 @@ public class InstructionsPanel extends JPanel
 
   public InstructionsPanel () {
 	  super();
+	  setBackground(Color.ORANGE);
+	  this.setLayout(null);
+  
 	  this.arrowKeys = (new ImageIcon("ArrowKeys.png")).getImage();
 	  this.upArrowKey = (new ImageIcon("arrowkey1.png")).getImage();
 	  this.downArrowKey = (new ImageIcon("arrowkey2.png")).getImage();
 	  this.leftArrowKey = (new ImageIcon("arrowkey3.png")).getImage();
 	  this.rightArrowKey = (new ImageIcon("arrowkey4.png")).getImage();
 	  
-	  setBackground(Color.ORANGE);
   }
 
   public void paintComponent(Graphics g)
@@ -49,12 +52,17 @@ public class InstructionsPanel extends JPanel
 
     int width = getWidth();
     int height = getHeight();
+    double ratioX = (double)width / (640 * 2);
+    double ratioY = height / (480.0 * 2);
+    
+    Graphics2D g2 = (Graphics2D)g;
+    AffineTransform at = g2.getTransform();
+    g2.scale(ratioX, ratioY);
+    g2.setTransform(at);
     
     g.drawImage(arrowKeys, width/2 ,height/2,  width/4, height/4, this); 
-  }
-
-}
-
+    
+   
   }
 
 }
