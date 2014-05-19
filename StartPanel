@@ -23,13 +23,11 @@ public class StartPanel extends JPanel implements MouseListener
 	private JButton startButton;
 	private int wOfButton = 200;
 	private int hOfButton = 70;
+	double randomIntforC = Math.random();
 	
-	 TotoroApp game1;
-    
-    // public boolean IsOn1 = true;
-	// public boolean IsOn2 = false;
-
-    
+	TotoroApp game1;
+	 
+	 
   public StartPanel (TotoroApp game) {
 	  
 	  super();
@@ -38,13 +36,34 @@ public class StartPanel extends JPanel implements MouseListener
 	  game1 = game;
 	  
 	  this.setLayout(null);
-	  
-	  // TODO: resizable button
+	 
 	  startButton = new JButton("Click Here To START");
-	  startButton.addMouseListener(this);
+	  
+      /* startButton.setBackground(Color.BLUE);
+	  startButton.setOpaque(true);
+	  startButton.setBorderPainted(false);
+	  startButton.addMouseListener(this); */
+	  
+	  /* for (int times = 1; times > 0; times++) {
+	  if (randomIntforC <= 0.25) {
+		  startButton.setBackground(Color.ORANGE);
+	  } 
+	  if (randomIntforC >= 0.26 && randomIntforC <= 0.50) {
+		  startButton.setBackground(Color.GREEN);
+	  }
+	  if (randomIntforC >= 0.51 && randomIntforC >= 0.75) {
+		  startButton.setBackground(Color.PINK);
+	  }
+	  if (randomIntforC >= 0.76) {
+		  startButton.setBackground(Color.RED);
+	  }
+	  randomIntforC = Math.random();
+	 }  */
+	 
+	 startButton.addMouseListener(this);
 		
 	  add(startButton);
-	  setVisible(true);
+	  startButton.setVisible(true);
   }
 
   public void paintComponent(Graphics g)
@@ -54,15 +73,14 @@ public class StartPanel extends JPanel implements MouseListener
     int width = getWidth();
     int height = getHeight();
     
-    double ratioX = (double)width / (640 * 3);
-    double ratioY = height / (480.0 * 3);
-    
-    int fontSize = 220;
+    double ratioX = (double)width / (640 * 2);
+    double ratioY = height / (480.0 * 2);
     
     Graphics2D g2 = (Graphics2D)g;
     AffineTransform at = g2.getTransform();
     g2.scale(ratioX, ratioY);
     
+    int fontSize = 150;
     int topOfText = 200;
     String text = "Totoro Lander";
     // get metrics from the graphics
@@ -96,18 +114,15 @@ public class StartPanel extends JPanel implements MouseListener
 @Override
 public void mouseClicked(MouseEvent e) {
 	game1.showBackground();
-	
 }
 
 @Override
 public void mouseEntered(MouseEvent e) {
-	// TODO Auto-generated method stub
 	
 }
 
 @Override
 public void mouseExited(MouseEvent e) {
-	// TODO Auto-generated method stub
 	
 }
 
@@ -118,12 +133,7 @@ public void mousePressed(MouseEvent e) {
 
 @Override
 public void mouseReleased(MouseEvent e) {
-	// TODO Auto-generated method stub
 	
 }
 
- 
-  
-  
 }
-
