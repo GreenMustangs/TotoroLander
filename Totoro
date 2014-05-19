@@ -24,7 +24,7 @@ public class Totoro extends MovingImage{
 			yVel = 0;
 		} */
 		moveByAmount(0, yVel);
-		yVel = yVel + 5;
+		yVel = yVel + 5;//why is this necessary?
 		if (getY() < 0) {
 			moveToLocation(getX(), 0);
 			yVel = 10;
