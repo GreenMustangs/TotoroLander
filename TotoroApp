@@ -40,6 +40,8 @@ public class TotoroApp extends JFrame {
 	    
 	    startPanel.startChangeColor();
 	    
+	    gamePanel.run();
+	    
 	    resultPanel = new ResultsPanel(this, this);
 	    this.add(resultPanel, "result"); 
 	}
