@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 
 import javax.swing.*;
@@ -17,7 +19,7 @@ import javax.swing.*;
 
    Sources - TODO list collaborators
  */
-public class InstructionsPanel extends JPanel
+public class InstructionsPanel extends JPanel implements MouseListener 
 {
 	// from StartPanel, ReultsPanel
 		/* if button is clicked: 
@@ -26,17 +28,23 @@ public class InstructionsPanel extends JPanel
 		 * -Press right to tilt towards right
 		 * - Objective: to safely land Totoro on the trees
 		 * */
+	
+	private JButton goBackButton;
 	private Image arrowKeys;
 	private Image upArrowKey; // key1
-	private Image downArrowKey;  // key 2
+	private Image downArrowKey; // key 2
 	private Image leftArrowKey; // key3
 	private Image rightArrowKey; // key4
+	
+	TotoroApp instructions2;
 
-
-  public InstructionsPanel () {
+	
+  public InstructionsPanel (TotoroApp instructionsB) {
 	  super();
-	  setBackground(Color.ORANGE);
+	  setBackground(Color.MAGENTA);
 	  this.setLayout(null);
+	  
+	  instructions2 = instructionsB;
   
 	  this.arrowKeys = (new ImageIcon("ArrowKeys.png")).getImage();
 	  this.upArrowKey = (new ImageIcon("arrowkey1.png")).getImage();
@@ -44,6 +52,12 @@ public class InstructionsPanel extends JPanel
 	  this.leftArrowKey = (new ImageIcon("arrowkey3.png")).getImage();
 	  this.rightArrowKey = (new ImageIcon("arrowkey4.png")).getImage();
 	  
+	  goBackButton = new JButton("Click to GO BACK");
+	  
+	  goBackButton.addMouseListener(this);
+		
+	  add(goBackButton);
+	  goBackButton.setVisible(true);
   }
 
   public void paintComponent(Graphics g)
@@ -58,11 +72,112 @@ public class InstructionsPanel extends JPanel
     Graphics2D g2 = (Graphics2D)g;
     AffineTransform at = g2.getTransform();
     g2.scale(ratioX, ratioY);
-    g2.setTransform(at);
     
-    g.drawImage(arrowKeys, width/2 ,height/2,  width/4, height/4, this); 
+    int keyWidthH = 100;// width and height
+    int keyX = 200;
+    int keyY = 200;
     
-   
+    g.drawImage(arrowKeys,0 ,0,  width/4, height/4, this); 
+    g.drawImage(upArrowKey,keyX ,keyY,  keyWidthH, keyWidthH, this); 
+    g.drawImage(downArrowKey,keyX, keyY + 150,  keyWidthH, keyWidthH, this); 
+    g.drawImage(leftArrowKey,keyX, keyY + 300,  keyWidthH, keyWidthH, this); 
+    g.drawImage(rightArrowKey,keyX, keyY + 450,  keyWidthH, keyWidthH, this); 
+    
+    int fontSize = 100;
+    int topOfText = 100;
+    String text = "Instructions";
+    // get metrics from the graphics
+    Font font = new Font("Monospaced", Font.BOLD, fontSize);
+    FontMetrics metrics = g.getFontMetrics(font);
+    // get the height of a line of text in this
+    // font and render context
+    int hgt = metrics.getHeight();
+    // get the advance of my text in this font
+    // and render context
+    int adv = metrics.stringWidth(text);
+    // calculate the size of a box to hold the
+    // text with some padding.
+    Dimension size = new Dimension(adv+2, hgt+2);
+  
+    int wOfText = (int)(size.width * ratioX);
+    int hOfText = (int)(size.height * ratioY);
+    
+	g.setFont(font);
+	g.setColor(Color.PINK);
+	g.drawString(text, width/3 - wOfText/2, topOfText);
+	
+	int fontSize2 = 50;
+    int topOfText2 = 260;
+    String text2 = "Go Upwards Faster";
+    String text3 = "Go Downwards Faster";
+    String text4 = "Move Totoro Left";
+    String text5 = "Move Totoro Right";
+    // get metrics from the graphics
+    Font font2 = new Font("Monospaced", Font.BOLD, fontSize2);
+    FontMetrics metrics2 = g.getFontMetrics(font);
+    // get the height of a line of text in this
+    // font and render context
+    int hgt2 = metrics2.getHeight();
+    // get the advance of my text in this font
+    // and render context
+    int adv2 = metrics2.stringWidth(text2);
+    // calculate the size of a box to hold the
+    // text with some padding.
+    Dimension size2 = new Dimension(adv2+2, hgt2+2);
+  
+    int wOfText2 = (int)(size2.width * ratioX);
+    int hOfText2 = (int)(size2.height * ratioY);
+    
+	g.setFont(font2);
+	g.setColor(Color.RED);
+	g.drawString(text2, keyX + 150, topOfText2);
+	
+	g.setFont(font2);
+	g.setColor(Color.RED);
+	g.drawString(text3, keyX + 150, topOfText2 + 150);
+	
+	g.setFont(font2);
+	g.setColor(Color.RED);
+	g.drawString(text4, keyX + 150, topOfText2 + 300);
+	
+	g.setFont(font2);
+	g.setColor(Color.RED);
+	g.drawString(text5, keyX + 150, topOfText2 + 450);
+	
+	int wOfButton = 200;
+	int hOfButton = 70;
+	int buttonX = getWidth() - wOfButton;
+	int buttonY = 0;
+	
+	goBackButton.setBounds(buttonX, buttonY, wOfButton, hOfButton);
+	
+	g2.setTransform(at);
   }
+
+@Override
+public void mouseClicked(MouseEvent e) {
+	instructions2.goBackToStart();
+	
+}
+
+@Override
+public void mouseEntered(MouseEvent e) {
+	
+}
+
+@Override
+public void mouseExited(MouseEvent e) {
+	
+}
+
+@Override
+public void mousePressed(MouseEvent e) {
+	
+}
+
+@Override
+public void mouseReleased(MouseEvent e) {
+	
+}
 
 }
