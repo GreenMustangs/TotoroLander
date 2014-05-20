@@ -40,6 +40,8 @@ public class TotoroApp extends JFrame {
 	    
 	    startPanel.startChangeColor();
 	    
+	    gamePanel.run();
+	    
 	    resultPanel = new ResultsPanel();
 	    this.add(resultPanel, "result"); 
 	}
@@ -49,7 +51,7 @@ public class TotoroApp extends JFrame {
 		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
 		cardLayout.show(this.getContentPane(), "game"); //
 		gamePanel.requestFocusInWindow();//
-	    gamePanel.startGame();//
+	    	gamePanel.startGame();//
 	}
 	
 	public void showInstructions () {
