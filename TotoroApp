@@ -35,14 +35,12 @@ public class TotoroApp extends JFrame {
 	    this.add(gamePanel, "game"); 
 	   
 	    
-	    instructionsPanel = new InstructionsPanel(this);
+	    instructionsPanel = new InstructionsPanel(this, this);
 	    this.add(instructionsPanel, "instructions"); 
 	    
 	    startPanel.startChangeColor();
 	    
-	    gamePanel.run();
-	    
-	    resultPanel = new ResultsPanel();
+	    resultPanel = new ResultsPanel(this, this);
 	    this.add(resultPanel, "result"); 
 	}
 	
@@ -51,7 +49,7 @@ public class TotoroApp extends JFrame {
 		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
 		cardLayout.show(this.getContentPane(), "game"); //
 		gamePanel.requestFocusInWindow();//
-	    	gamePanel.startGame();//
+	    gamePanel.startGame();
 	}
 	
 	public void showInstructions () {
@@ -66,11 +64,11 @@ public class TotoroApp extends JFrame {
 		startPanel.requestFocusInWindow();
 	}
 	
-	/* public void goBackToResults () {
+	public void goBackToResults () {
 		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
 		cardLayout.show(this.getContentPane(), "results");
-		resultsPanel.requestFocusInWindow();
-	} */
+		resultPanel.requestFocusInWindow();
+	} 
 
 	public static void main(String[] args)
 	  {
