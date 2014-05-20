@@ -1,8 +1,3 @@
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-
-import javax.swing.*;
-
 /**
    TODO Write a one-sentence summary of your class here.
    TODO Follow it with additional details about its purpose, what abstraction
@@ -16,14 +11,97 @@ import javax.swing.*;
 
    Sources - TODO list collaborators
  */
-public class ResultsPanel extends JPanel
+public class ResultsPanel extends JPanel implements MouseListener 
 {
-	
+	private JButton restartButton;
+	private JButton goToInstructionsButton2;
+	public boolean result = false;
+	TotoroApp game2;
+	TotoroApp instructions4;
 
 
-  public ResultsPanel () {
+  public ResultsPanel (TotoroApp gameRestart, TotoroApp instructions5) {
 	  super();
+	  setBackground(Color.GREEN);
+	  restartButton = new JButton("Play Again?");
+	  goToInstructionsButton2 = new JButton("Click For Instructions");
+	  game2 = gameRestart;
+	  instructions4 = instructions5;
 	  
+	  this.setLayout(null);
+	 
+	  
+	
+	  restartButton.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				game2.showBackground();
+				
+			}
+		});
+	  goToInstructionsButton2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				result = true;
+				instructions4.showInstructions();
+			}
+		});
+			
+	  add(restartButton);
+	  add(goToInstructionsButton2);
+	  restartButton.setVisible(true);
+	  goToInstructionsButton2.setVisible(true);
 
   }
 
@@ -41,9 +119,9 @@ public class ResultsPanel extends JPanel
     AffineTransform at = g2.getTransform();
     g2.scale(ratioX, ratioY);
     
-    int fontSize = 150;
-    int topOfText = 200;
-    String text = "Totoro Lander";
+    int fontSize = 125;
+    int topOfText = 100;
+    String text = "Results";
     // get metrics from the graphics
     Font font = new Font("Monospaced", Font.BOLD, fontSize);
     FontMetrics metrics = g.getFontMetrics(font);
@@ -61,10 +139,106 @@ public class ResultsPanel extends JPanel
     int hOfText = (int)(size.height * ratioY);
     
 	g.setFont(font);
-	g.setColor(new Color(0, 125, 125));
+	g.setColor(Color.ORANGE);
 	g.drawString(text, width/2 - wOfText/2, topOfText);
+	
+	if (! totororo.checkEndOfGame()) {
+	int fontSize2 = 70;
+    int topOfText2 = 100;
+    String text2 = "Next Time Be Careful!";
+    // get metrics from the graphics
+    Font font2 = new Font("Monospaced", Font.BOLD, fontSize2);
+    FontMetrics metrics2 = g.getFontMetrics(font2);
+    // get the height of a line of text in this
+    // font and render context
+    int hgt2 = metrics2.getHeight();
+    // get the advance of my text in this font
+    // and render context
+    int adv2 = metrics2.stringWidth(text2);
+    // calculate the size of a box to hold the
+    // text with some padding.
+    Dimension size2 = new Dimension(adv2+2, hgt2+2);
+  
+    int wOfText2 = (int)(size2.width * ratioX);
+    int hOfText2 = (int)(size2.height * ratioY);
+    
+	g.setFont(font2);
+	g.setColor(Color.PINK);
+	g.drawString(text2, width/3 - wOfText2/2 + 20, height/2 - hOfText2); 
+    } else {
+	int fontSize3 = 70;
+    int topOfText3 = 100;
+    String text3 = "Long Live Totoro!";
+    // get metrics from the graphics
+    Font font3 = new Font("Monospaced", Font.BOLD, fontSize3);
+    FontMetrics metrics3 = g.getFontMetrics(font3);
+    // get the height of a line of text in this
+    // font and render context
+    int hgt3 = metrics3.getHeight();
+    // get the advance of my text in this font
+    // and render context
+    int adv3 = metrics3.stringWidth(text3);
+    // calculate the size of a box to hold the
+    // text with some padding.
+    Dimension size3 = new Dimension(adv3+2, hgt3+2);
+  
+    int wOfText3 = (int)(size3.width * ratioX);
+    int hOfText3 = (int)(size3.height * ratioY);
+    
+	g.setFont(font3);
+	g.setColor(Color.PINK);
+	g.drawString(text3, width/2 - wOfText3/2, height/2 - hOfText3); 
+    }
+	
+	int wOfButton = 200;
+	int hOfButton = 100;
+	int buttonX = getWidth()/2 - wOfButton/2;
+	int buttonY = height/2;
+	restartButton.setBounds(buttonX, buttonY, wOfButton, hOfButton);
+	
+	int wOfButton2 = 200;
+	int hOfButton2 = 70;
+	int buttonX2 = getWidth() - wOfButton2;
+	int buttonY2 = 0;
+	
+	goToInstructionsButton2.setBounds(buttonX2, buttonY2, wOfButton2, hOfButton2);
 
     g2.setTransform(at);
   }
+
+@Override
+public void mouseClicked(MouseEvent arg0) {
+	game2.showBackground();
+	
 }
 
+@Override
+public void mouseEntered(MouseEvent arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseExited(MouseEvent arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mousePressed(MouseEvent arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseReleased(MouseEvent arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+public boolean getResult()
+{
+	return result;
+}
+
+}
