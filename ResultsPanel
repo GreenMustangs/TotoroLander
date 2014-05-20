@@ -1,1 +1,70 @@
-hi
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+
+import javax.swing.*;
+
+/**
+   TODO Write a one-sentence summary of your class here.
+   TODO Follow it with additional details about its purpose, what abstraction
+   it represents, and how to use it.
+
+   @author  TODO Your Name
+   @version TODO Date
+
+   Period - TODO Your Period
+   Assignment - TODO Name of Assignment
+
+   Sources - TODO list collaborators
+ */
+public class ResultsPanel extends JPanel
+{
+	
+
+
+  public ResultsPanel () {
+	  super();
+	  
+
+  }
+
+  public void paintComponent(Graphics g)
+  {
+    super.paintComponent(g);  // Call JPanel's paintComponent method to paint the background
+
+    int width = getWidth();
+    int height = getHeight();
+    
+    double ratioX = (double)width / (640 * 2);
+    double ratioY = height / (480.0 * 2);
+    
+    Graphics2D g2 = (Graphics2D)g;
+    AffineTransform at = g2.getTransform();
+    g2.scale(ratioX, ratioY);
+    
+    int fontSize = 150;
+    int topOfText = 200;
+    String text = "Totoro Lander";
+    // get metrics from the graphics
+    Font font = new Font("Monospaced", Font.BOLD, fontSize);
+    FontMetrics metrics = g.getFontMetrics(font);
+    // get the height of a line of text in this
+    // font and render context
+    int hgt = metrics.getHeight();
+    // get the advance of my text in this font
+    // and render context
+    int adv = metrics.stringWidth(text);
+    // calculate the size of a box to hold the
+    // text with some padding.
+    Dimension size = new Dimension(adv+2, hgt+2);
+  
+    int wOfText = (int)(size.width * ratioX);
+    int hOfText = (int)(size.height * ratioY);
+    
+	g.setFont(font);
+	g.setColor(new Color(0, 125, 125));
+	g.drawString(text, width/2 - wOfText/2, topOfText);
+
+    g2.setTransform(at);
+  }
+}
+
