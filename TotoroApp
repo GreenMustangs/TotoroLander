@@ -14,36 +14,61 @@ public class TotoroApp extends JFrame {
 	StartPanel startPanel;
 	TreeBackground gamePanel;
 	InstructionsPanel instructionsPanel;
+	ResultsPanel resultPanel;
+	private int widthOfWindow = 640;
+	private int heightOfWindow = 480;
 	
 	public TotoroApp(String title) throws HeadlessException {
 		super(title);
 		
 		this.setLayout(new CardLayout());
-		this.setBounds(0, 0, 640 * 2, 480 * 2);
+		this.setBounds(0, 0, widthOfWindow * 2, heightOfWindow * 2);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setMinimumSize(new Dimension((int)(widthOfWindow * 1.6), (int)(heightOfWindow * 1.4)));
 	    this.setResizable(true);
 	    this.setVisible(true);
 		
-		startPanel = new StartPanel(this);
+		startPanel = new StartPanel(this, this);
 	    this.add(startPanel, "start");  
 	    
 	    gamePanel = new TreeBackground();
 	    this.add(gamePanel, "game"); 
 	   
 	    
-	    instructionsPanel = new InstructionsPanel();
+	    instructionsPanel = new InstructionsPanel(this);
 	    this.add(instructionsPanel, "instructions"); 
-
-		
+	    
+	    startPanel.startChangeColor();
+	    
+	    resultPanel = new ResultsPanel();
+	    this.add(resultPanel, "result"); 
 	}
 	
 	// make treeBackground visible
 	public void showBackground () {
 		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
-		cardLayout.show(this.getContentPane(), "game");
-		gamePanel.requestFocusInWindow();
-		gamePanel.startGame();
+		cardLayout.show(this.getContentPane(), "game"); //
+		gamePanel.requestFocusInWindow();//
+	    gamePanel.startGame();//
 	}
+	
+	public void showInstructions () {
+		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
+		cardLayout.show(this.getContentPane(), "instructions");
+		instructionsPanel.requestFocusInWindow();
+	}
+	
+	public void goBackToStart () {
+		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
+		cardLayout.show(this.getContentPane(), "start");
+		startPanel.requestFocusInWindow();
+	}
+	
+	/* public void goBackToResults () {
+		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
+		cardLayout.show(this.getContentPane(), "results");
+		resultsPanel.requestFocusInWindow();
+	} */
 
 	public static void main(String[] args)
 	  {
