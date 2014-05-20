@@ -18,7 +18,7 @@ public class TotoroApp extends JFrame {
 	private int widthOfWindow = 640;
 	private int heightOfWindow = 480;
 	
-	public TotoroApp(String title) throws HeadlessException {
+	public TotoroApp(String title)  {
 		super(title);
 		
 		this.setLayout(new CardLayout());
