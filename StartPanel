@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
@@ -18,52 +20,99 @@ import javax.swing.*;
 
    Sources - TODO list collaborators
  */
-public class StartPanel extends JPanel implements MouseListener  
+public class StartPanel extends JPanel implements  ActionListener  
 {
 	private JButton startButton;
+	private JButton goToInstructionsButton;
 	private int wOfButton = 200;
 	private int hOfButton = 70;
-	double randomIntforC = Math.random();
+	private Timer timer;
 	
 	TotoroApp game1;
+	TotoroApp instructions1;
 	 
-	 
-  public StartPanel (TotoroApp game) {
+  public StartPanel (TotoroApp game, TotoroApp instructions) {
 	  
 	  super();
 	  setBackground(Color.CYAN);
 	  
 	  game1 = game;
+	  instructions1 = instructions;
 	  
 	  this.setLayout(null);
 	 
 	  startButton = new JButton("Click Here To START");
-	  
-      /* startButton.setBackground(Color.BLUE);
-	  startButton.setOpaque(true);
-	  startButton.setBorderPainted(false);
-	  startButton.addMouseListener(this); */
-	  
-	  /* for (int times = 1; times > 0; times++) {
-	  if (randomIntforC <= 0.25) {
-		  startButton.setBackground(Color.ORANGE);
-	  } 
-	  if (randomIntforC >= 0.26 && randomIntforC <= 0.50) {
-		  startButton.setBackground(Color.GREEN);
-	  }
-	  if (randomIntforC >= 0.51 && randomIntforC >= 0.75) {
-		  startButton.setBackground(Color.PINK);
-	  }
-	  if (randomIntforC >= 0.76) {
-		  startButton.setBackground(Color.RED);
-	  }
-	  randomIntforC = Math.random();
-	 }  */
-	 
-	 startButton.addMouseListener(this);
+	  goToInstructionsButton = new JButton("Click For Instructions");
+	  	 
+	 startButton.addMouseListener(new MouseListener() {
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			endChangeColor();
+			game1.showBackground();
+			
+		}
+	});
+	 goToInstructionsButton.addMouseListener(new MouseListener() {
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			instructions1.showInstructions();
+		}
+	});
 		
 	  add(startButton);
+	  add(goToInstructionsButton);
 	  startButton.setVisible(true);
+	  goToInstructionsButton.setVisible(true);
   }
 
   public void paintComponent(Graphics g)
@@ -105,35 +154,51 @@ public class StartPanel extends JPanel implements MouseListener
 	
 	int buttonX = getWidth()/2 - wOfButton/2;
 	int buttonY = getHeight()/2 - hOfButton/2;
+	
+	int wOfButton1 = 200;
+	int hOfButton1 = 70;
+	int buttonX1 = getWidth() - wOfButton;
+	int buttonY1 = 0;
 	  
 	startButton.setBounds(buttonX, buttonY, wOfButton, hOfButton);
+	goToInstructionsButton.setBounds(buttonX1, buttonY1, wOfButton1, hOfButton1);
 	
 	g2.setTransform(at);
   }
-
-@Override
-public void mouseClicked(MouseEvent e) {
-	game1.showBackground();
-}
-
-@Override
-public void mouseEntered(MouseEvent e) {
+  
+  public void startChangeColor() {
+		
+		timer = new Timer(1000, this);
+		timer.start();
+		
+	}
 	
-}
+	public void endChangeColor() {
+		timer.stop();
+	}
 
 @Override
-public void mouseExited(MouseEvent e) {
+public void actionPerformed(ActionEvent arg0) {
+	       startButton.setOpaque(true);
+           startButton.setBorderPainted(false);
 	
-}
-
-@Override
-public void mousePressed(MouseEvent e) {
-	
-}
-
-@Override
-public void mouseReleased(MouseEvent e) {
-	
+	     double randomIntforC = Math.random();
+	     
+		 if (randomIntforC <= 0.25) {
+			  startButton.setBackground(Color.ORANGE);
+		  } 
+		  if (randomIntforC >= 0.26 && randomIntforC <= 0.50) {
+			  startButton.setBackground(Color.GREEN);
+		  }
+		  if (randomIntforC >= 0.51 && randomIntforC >= 0.75) {
+			  startButton.setBackground(Color.PINK);
+		  }
+		  if (randomIntforC >= 0.76) {
+			  startButton.setBackground(Color.MAGENTA);
+		  }
+		  randomIntforC = Math.random();
+		  repaint();
+		 
 }
 
 }
