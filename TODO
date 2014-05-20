@@ -1,13 +1,21 @@
-StartPanel
+StartPanel - Me
 -Finshed ! but needs the code to be cleaned
 
-- main game
--ending
+InstructionsPanel - Me
 
--instructions
-- not resizing
+MovingImage - Amy
 
--results
+ResultsPanel - 
+
+StatsCounter - ACTUALLY we don't need it so delete it OK?
+
+Totoro - Amy
+
+TotoroApp - Me
+
+TreeBackground - AMy
+
+
 
 Other:
 - clean code
