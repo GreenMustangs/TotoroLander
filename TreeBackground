@@ -9,15 +9,14 @@ import javax.swing.*;
 public class TreeBackground extends JPanel implements KeyListener {
 
 	private MovingImage[] trees;
-	private Totoro totororo;
-	public static final int heightOfTree = 150;
+	public Totoro totororo;
+	private static final int heightOfTree = 100;
 	private final int widthOfScreen = 640 * 2;
 	private final int XOfTree = 680 * 2;
 	private final int YOfTree = 480 * 2 - heightOfTree;
 	private final int widthOfTree = 50;
 	private int heightOfScreen = 480 * 2;
 	private final int numOfTrees = widthOfScreen/ widthOfTree;
-	
 	private boolean paused;
 
 	public TreeBackground()
@@ -72,7 +71,7 @@ public class TreeBackground extends JPanel implements KeyListener {
 		    {
 		    	if(trees[j] != null)
 		    	{
-		    		trees[j].moveByAmount(-4, 0);
+		    		trees[j].moveByAmount(-10, 0);
 		    	}
 		    }
 		}
@@ -82,19 +81,18 @@ public class TreeBackground extends JPanel implements KeyListener {
 		    {
 		    	if(trees[j] != null)
 		    	{
-		    		trees[j].moveByAmount(4, 0);
+		    		trees[j].moveByAmount(10, 0);
 		    	}
 		    }
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			totororo.goSlower(20);
+			totororo.goSlower(10);
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
 			totororo.goFaster(10);
 		}
-		//repaint();
 	}
 
 	@Override
@@ -113,7 +111,7 @@ public class TreeBackground extends JPanel implements KeyListener {
 	  	while(true) {
 	  		// MAKE A CHANGE
 	  		
-	  		//if (!paused) {
+	  		if (!paused) {
 		  		MovingImage tree = null;
 		  		int randomInt = (int)(3 * Math.random() + 1);
 			    if(randomInt == 1)
@@ -143,7 +141,7 @@ public class TreeBackground extends JPanel implements KeyListener {
 		  			break;
 		  		}
 
-	  		//}
+	  		}
 	  		// SHOW THE CHANGE
     		repaint();
     		try {
