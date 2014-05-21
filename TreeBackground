@@ -6,29 +6,49 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.*;
 
-public class TreeBackground extends JPanel implements KeyListener {
-
+public class TreeBackground extends JPanel implements KeyListener, ActionListener {
+	
 	private MovingImage[] trees;
-	public Totoro totororo;
-	private static final int heightOfTree = 100;
+	private Totoro totororo;
+	public static final int heightOfTree = 150;
 	private final int widthOfScreen = 640 * 2;
 	private final int XOfTree = 680 * 2;
 	private final int YOfTree = 480 * 2 - heightOfTree;
 	private final int widthOfTree = 50;
 	private int heightOfScreen = 480 * 2;
 	private final int numOfTrees = widthOfScreen/ widthOfTree;
-	private boolean paused;
+	private Timer timer;
+	private TotoroApp app;
 
-	public TreeBackground()
+	public TreeBackground(TotoroApp app)
 	{
 		super();
 		setBackground(Color.CYAN);
-		trees = new MovingImage[100];//initialize array trees
-		totororo = new Totoro(640 * 2 / 2 - 25, 0);
+		trees = new MovingImage[1000];//initialize array trees
+		
 		this.setFocusable(true);
-
+		
 		this.addKeyListener(this);
-		paused = true;
+
+		this.app = app;
+		
+		 MovingImage tree;
+	    for(int i = 0; i < trees.length; i++)// PUT THE TREE IN YOUR ARRAY
+	    {
+	    	int randomInt = (int)(3 * Math.random() + 1);
+	    	if(randomInt == 1) {
+	    	    	tree = new MovingImage("tree1.png", i * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
+	    	} else if (randomInt == 2) {
+	    		tree = new MovingImage("tree2.png", i * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
+	    	} else {
+	    		tree = new MovingImage("tree3.png", i * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
+	    	}
+	    	
+	    	
+	    		trees[i] = tree;
+	    	
+	    } 
+	  
 	}
 
 	public void paintComponent(Graphics g)
@@ -42,8 +62,10 @@ public class TreeBackground extends JPanel implements KeyListener {
 	    Graphics2D g2 = (Graphics2D)g;
 	    g2.scale(ratioX, ratioY);
 	    AffineTransform at = g2.getTransform();
+	    g2.setTransform(at);
+
+	    totororo.draw(g2, this);
 	    
-	    totororo.draw(g, this);
 
 	    // CALL THE DRAW METHOD ON ALL TREES
 	    for(int i = 0; i < trees.length; i++)
@@ -53,7 +75,6 @@ public class TreeBackground extends JPanel implements KeyListener {
 		    	trees[i].draw(g, this);
 		    }
 		}
-	    g2.setTransform(at);
 	}
 
 	@Override
@@ -93,6 +114,7 @@ public class TreeBackground extends JPanel implements KeyListener {
 		{
 			totororo.goFaster(10);
 		}
+		this.repaint();
 	}
 
 	@Override
@@ -102,58 +124,60 @@ public class TreeBackground extends JPanel implements KeyListener {
 	}
 	
 	public void startGame() {
-		paused = false;
+		totororo = new Totoro(640 * 2 / 2 - 25, 0);
+		timer = new Timer(500, this);
+		timer.start();
+		
 	}
 	
-	public void run()
-	{
-		int whatever = -1000;
-	  	while(true) {
-	  		// MAKE A CHANGE
-	  		
-	  		if (!paused) {
-		  		MovingImage tree = null;
-		  		int randomInt = (int)(3 * Math.random() + 1);
-			    if(randomInt == 1)
-			    {
-			    	tree = new MovingImage("tree1.png", 640 * 2 - whatever, 480 * 2 - 100, 50, 100);// MAKE A NEW TREE			    	
-			    }
-			    else if(randomInt == 2)
-			    {
-			    	tree = new MovingImage("tree2.png", 640 * 2 - whatever, 480 * 2 - 100, 50, 100);// MAKE A NEW TREE
-			    }
-			    else if(randomInt == 3)
-			    {
-			    	tree = new MovingImage("tree3.png", 640 * 2 - whatever, 480 * 2 - 100, 50, 100);// MAKE A NEW TREE 	
-			    }
-			    for(int i = 0; i < trees.length; i++)// PUT THE TREE IN YOUR ARRAY
-		    	{
-		    		if(trees[i] == null)
-		    		{
-		    			trees[i] = tree;
-		    			break;
-		    		}
-		    	}
-			    whatever += 40;
-			    for(int i = 0; i < trees.length; i++)
-		  		{
-		  			totororo.fall(trees[i]);
-		  			break;
-		  		}
+	public void endGame() {
+		timer.stop();
+		app.gotToResults(totororo);
+		
+	}
 
+		  	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		   
+		   if (totororo.checkEndOfGame()) {
+			   repaint();
+			   endGame();
+			   
+		   } 
+		   totororo.fall(null);
+		   
+		
+		   for(int i = 0; i < trees.length; i++)
+	  		{
+	  			// totororo.fall(trees[i]);
+	  			// break;
 	  		}
+		    // MOVE ALL TREES
+		    for(int x = 0; x < trees.length; x++)
+		    {
+		    	if(trees[x] != null)
+		    	{
+		    		trees[x].moveByAmount(-4, 0);
+		    	}
+		    }
+		    /* 
+	  	for(int i = 0; i < trees.length; i++)
+	  		{
+	  			if(trees[i] != null)
+	  			{
+	  				totororo.fall(trees[i]);
+	  			}
+	  			else
+	  			{
+
+	  			}
+	  		} */
 	  		// SHOW THE CHANGE
     		repaint();
-    		try {
-			Thread.sleep(20);
-    		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
-	}
+
+
 }
-
-
-
