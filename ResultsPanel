@@ -1,3 +1,10 @@
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+
+import javax.swing.*;
+
 /**
    TODO Write a one-sentence summary of your class here.
    TODO Follow it with additional details about its purpose, what abstraction
@@ -11,29 +18,24 @@
 
    Sources - TODO list collaborators
  */
- import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
 public class ResultsPanel extends JPanel implements MouseListener 
 {
 	private JButton restartButton;
 	private JButton goToInstructionsButton2;
-	public boolean result = false;
+	// public boolean result = false;
 	TotoroApp game2;
-	TotoroApp instructions4;
+	Totoro totoro;
+	//TotoroApp instructions4;
 
 
-  public ResultsPanel (TotoroApp gameRestart, TotoroApp instructions5) {
+  public ResultsPanel (TotoroApp gameRestart) {
 	  super();
 	  setBackground(Color.GREEN);
 	  restartButton = new JButton("Play Again?");
 	  goToInstructionsButton2 = new JButton("Click For Instructions");
 	  game2 = gameRestart;
-	  instructions4 = instructions5;
+	  // instructions4 = instructions5;
+	  
 	  
 	  this.setLayout(null);
 	 
@@ -100,8 +102,8 @@ public class ResultsPanel extends JPanel implements MouseListener
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				result = true;
-				instructions4.showInstructions();
+				// result = true;
+				game2.showInstructionsFromResult();
 			}
 		});
 			
@@ -149,7 +151,7 @@ public class ResultsPanel extends JPanel implements MouseListener
 	g.setColor(Color.ORANGE);
 	g.drawString(text, width/2 - wOfText/2, topOfText);
 	
-	if (! totororo.checkEndOfGame()) {
+	if (totoro.isKilled) {
 	int fontSize2 = 70;
     int topOfText2 = 100;
     String text2 = "Next Time Be Careful!";
@@ -167,12 +169,12 @@ public class ResultsPanel extends JPanel implements MouseListener
     Dimension size2 = new Dimension(adv2+2, hgt2+2);
   
     int wOfText2 = (int)(size2.width * ratioX);
-    int hOfText2 = (int)(size2.height * ratioY);
+    int hOfText2 = (int)(size2.height * ratioY); 
     
 	g.setFont(font2);
 	g.setColor(Color.PINK);
-	g.drawString(text2, width/3 - wOfText2/2 + 20, height/2 - hOfText2); 
-    } else {
+	g.drawString(text2, width/2 - wOfText2/2 + 20, height/2 - hOfText2); 
+    } else { 
 	int fontSize3 = 70;
     int topOfText3 = 100;
     String text3 = "Long Live Totoro!";
@@ -195,7 +197,8 @@ public class ResultsPanel extends JPanel implements MouseListener
 	g.setFont(font3);
 	g.setColor(Color.PINK);
 	g.drawString(text3, width/2 - wOfText3/2, height/2 - hOfText3); 
-    }
+	}
+    
 	
 	int wOfButton = 200;
 	int hOfButton = 100;
@@ -213,9 +216,11 @@ public class ResultsPanel extends JPanel implements MouseListener
     g2.setTransform(at);
   }
 
+
+
 @Override
 public void mouseClicked(MouseEvent arg0) {
-	game2.showBackground();
+	// TODO Auto-generated method stub
 	
 }
 
@@ -241,11 +246,6 @@ public void mousePressed(MouseEvent arg0) {
 public void mouseReleased(MouseEvent arg0) {
 	// TODO Auto-generated method stub
 	
-}
-
-public boolean getResult()
-{
-	return result;
 }
 
 }
