@@ -11,10 +11,11 @@ import javax.swing.JPanel;
 	
 public class TotoroApp extends JFrame {
 	  
-	StartPanel startPanel;
-	TreeBackground gamePanel;
-	InstructionsPanel instructionsPanel;
-	ResultsPanel resultPanel;
+	private StartPanel startPanel;
+	private TreeBackground gamePanel;
+	private InstructionsPanel instructionsPanel;
+	private ResultsPanel resultPanel;
+	private boolean isFromStart = false;
 	private int widthOfWindow = 640;
 	private int heightOfWindow = 480;
 	
@@ -28,21 +29,18 @@ public class TotoroApp extends JFrame {
 	    this.setResizable(true);
 	    this.setVisible(true);
 		
-		startPanel = new StartPanel(this, this);
+		startPanel = new StartPanel(this);
 	    this.add(startPanel, "start");  
 	    
-	    gamePanel = new TreeBackground();
+	    gamePanel = new TreeBackground(this);
 	    this.add(gamePanel, "game"); 
 	   
-	    
-	    instructionsPanel = new InstructionsPanel(this, this);
+	    instructionsPanel = new InstructionsPanel(this);
 	    this.add(instructionsPanel, "instructions"); 
 	    
 	    startPanel.startChangeColor();
 	    
-	    gamePanel.run();
-	    
-	    resultPanel = new ResultsPanel(this, this);
+	    resultPanel = new ResultsPanel(this);
 	    this.add(resultPanel, "result"); 
 	}
 	
@@ -54,24 +52,44 @@ public class TotoroApp extends JFrame {
 	    gamePanel.startGame();
 	}
 	
-	public void showInstructions () {
+	public void showInstructionsFromStart () {
+		isFromStart = true;
 		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
 		cardLayout.show(this.getContentPane(), "instructions");
 		instructionsPanel.requestFocusInWindow();
+		//System.out.println("show instructions from start");
 	}
 	
-	public void goBackToStart () {
+	public void showInstructionsFromResult () {
+		isFromStart = false;
 		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
-		cardLayout.show(this.getContentPane(), "start");
-		startPanel.requestFocusInWindow();
+		cardLayout.show(this.getContentPane(), "instructions");
+		instructionsPanel.requestFocusInWindow();
+		//System.out.println("show instructions from result");
 	}
 	
-	public void goBackToResults () {
+	public void returnFromInstructions () {
 		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
-		cardLayout.show(this.getContentPane(), "results");
-		resultPanel.requestFocusInWindow();
+		if (isFromStart) {
+			cardLayout.show(this.getContentPane(), "start");
+			//System.out.println("returning instructions from start");
+			startPanel.requestFocusInWindow();
+		} else {
+			cardLayout.show(this.getContentPane(), "result");
+			//System.out.println("returning instructions from result");
+			resultPanel.requestFocusInWindow();
+		}
+		
+		// isFromStart = false;
 	} 
-
+	
+	public void gotToResults (Totoro totoro) {
+		resultPanel.totoro = totoro;
+		CardLayout cardLayout = (CardLayout) this.getContentPane().getLayout();
+		cardLayout.show(this.getContentPane(), "result");
+		resultPanel.requestFocusInWindow();
+	}
+	
 	public static void main(String[] args)
 	  {
 	    JFrame w = new TotoroApp("TotoroApp");
