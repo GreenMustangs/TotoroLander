@@ -27,17 +27,16 @@ public class StartPanel extends JPanel implements  ActionListener
 	private int wOfButton = 200;
 	private int hOfButton = 70;
 	private Timer timer;
+	public boolean start = false;
 	
 	TotoroApp game1;
-	TotoroApp instructions1;
 	 
-  public StartPanel (TotoroApp game, TotoroApp instructions) {
+  public StartPanel (TotoroApp game) {
 	  
 	  super();
 	  setBackground(Color.CYAN);
 	  
 	  game1 = game;
-	  instructions1 = instructions;
 	  
 	  this.setLayout(null);
 	 
@@ -105,7 +104,8 @@ public class StartPanel extends JPanel implements  ActionListener
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			instructions1.showInstructions();
+			// start = true;
+			game1.showInstructionsFromStart();
 		}
 	});
 		
@@ -200,5 +200,7 @@ public void actionPerformed(ActionEvent arg0) {
 		  repaint();
 		 
 }
+
+
 
 }
