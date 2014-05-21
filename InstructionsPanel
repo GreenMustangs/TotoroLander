@@ -36,17 +36,15 @@ public class InstructionsPanel extends JPanel implements MouseListener
 	private Image leftArrowKey; // key3
 	private Image rightArrowKey; // key4
 	
-	TotoroApp instructions2;
-	TotoroApp instructions3;
+	TotoroApp app1;
 
 	
-  public InstructionsPanel (TotoroApp instructionsA, TotoroApp instructionsB) {
+  public InstructionsPanel (TotoroApp app) {
 	  super();
 	  setBackground(Color.MAGENTA);
 	  this.setLayout(null);
 	  
-	  instructions2 = instructionsA;
-	  instructions3 = instructionsB;
+	  app1 = app;
   
 	  this.arrowKeys = (new ImageIcon("ArrowKeys.png")).getImage();
 	  this.upArrowKey = (new ImageIcon("arrowkey1.png")).getImage();
@@ -106,7 +104,7 @@ public class InstructionsPanel extends JPanel implements MouseListener
     
 	g.setFont(font);
 	g.setColor(Color.PINK);
-	g.drawString(text, width/3 - wOfText/2, topOfText);
+	g.drawString(text, width/2 - wOfText/2, topOfText);
 	
 	int fontSize2 = 50;
     int topOfText2 = 260;
@@ -158,20 +156,8 @@ public class InstructionsPanel extends JPanel implements MouseListener
 
 @Override
 public void mouseClicked(MouseEvent e) { 
-	StartPanel startP = null;
-	boolean start2 = startP.getStart();
 	
-	ResultsPanel resultP = null;
-	boolean result2 = resultP.getResult();
-	
-	if (start2 == true) {
-		instructions2.goBackToStart();
-		start2 = false;
-	} else {
-		instructions3.goBackToResults();
-		result2 = false;
-	}
-	
+     app1.returnFromInstructions();
 }
 
 @Override
