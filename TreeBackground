@@ -141,11 +141,11 @@ public class TreeBackground extends JPanel implements KeyListener, ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		   
-		   if (!totororo.checkEndOfGame()) {
+		    if (!totororo.checkEndOfGame()) {
 			   repaint();
 			   endGame();
 		   } 
- 			totororo.fall(480 * 2 - 100);
+ 			totororo.fall(heightOfScreen - heightOfTree - 100);
 
 		    // MOVE ALL TREES
 		    for(int x = 0; x < trees.length; x++)
