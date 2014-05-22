@@ -37,11 +37,11 @@ public class TreeBackground extends JPanel implements KeyListener, ActionListene
 	    {
 	    	int randomInt = (int)(3 * Math.random() + 1);
 	    	if(randomInt == 1) {
-	    	    	tree = new MovingImage("tree1.png", i * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
+	    	    	tree = new MovingImage("tree1.png", (i - 500) * widthOfTree , YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
 	    	} else if (randomInt == 2) {
-	    		tree = new MovingImage("tree2.png", i * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
+	    		tree = new MovingImage("tree2.png", (i - 500) * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
 	    	} else {
-	    		tree = new MovingImage("tree3.png", i * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
+	    		tree = new MovingImage("tree3.png", (i - 500) * widthOfTree, YOfTree, widthOfTree, heightOfTree);// MAKE A NEW TREE
 	    	}
 	    	
 	    	
