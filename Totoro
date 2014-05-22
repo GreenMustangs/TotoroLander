@@ -56,20 +56,18 @@ public class Totoro extends MovingImage{
 		return isKilled;
 	}
 
-	public boolean checkEndOfGame() {
-		if (getY() >= heightOfScreen - 100) {
+	public int checkEndOfGame() {
+		if (getY() == heightOfScreen - 250) {
 			if (yVel < 40) {
-				isLandSafely = true;
-				return true;
+				return 1;
 			} else {
 				isKilled = true;
-				return false;
+				return 2;
 			}
-
 		}
 		else
 		{
-			return true;
+			return 3;
 		}
 	}
 }
