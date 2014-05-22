@@ -162,7 +162,7 @@ public class InstructionsPanel extends JPanel implements MouseListener
 @Override
 public void mouseClicked(MouseEvent e) { 
 	
-    //  app1.returnFromInstructions();
+     app1.returnFromInstructions();
 }
 
 @Override
