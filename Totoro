@@ -23,7 +23,7 @@ public class Totoro extends MovingImage{
 		moveByAmount(0, yVel);
 		if(getY() > yCoor)
 		{
-			moveToLocation(getX(), heightOfScreen - 100);
+			moveToLocation(getX(), heightOfScreen - 250);
 			yVel = 0;
 		}
 	} 
