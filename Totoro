@@ -3,24 +3,29 @@ import java.awt.Image;
 
 public class Totoro extends MovingImage{
 
-	private double xVel, yVel = 0;
+	private int xVel, yVel = 0;
 	private int widthOfScreen = 640 * 2;
 	private int heightOfScreen = 480 * 2;
-	private boolean isLandSafely = false;
-	private boolean isKilled = false;
+	public boolean isLandSafely = false;
+	public boolean isKilled = false;
 
 
 	public Totoro(int x, int y) {
 		super("totoro.png",x,y,50,100);
 	}
 
-	public void fall(MovingImage platform) {
+	public void fall(int yCoor) {
 		yVel += 2;
 		if (getY() < 0) {
 			moveToLocation(getX(), 0);
-			yVel = 4;
+			yVel = 5;
 		}
-		moveByAmount(0, (int)yVel);
+		moveByAmount(0, yVel);
+		if(getY() > yCoor)
+		{
+			moveToLocation(getX(), heightOfScreen - 100);
+			yVel = 0;
+		}
 	} 
 
 	public void moveSideways(int dir)
@@ -52,12 +57,12 @@ public class Totoro extends MovingImage{
 	}
 
 	public boolean checkEndOfGame() {
-		if (getY() > heightOfScreen - 100) {
+		if (getY() >= heightOfScreen - 100) {
 			if (yVel < 40) {
 				isLandSafely = true;
 				return true;
 			} else {
-				isLandSafely = false;
+				isKilled = true;
 				return false;
 			}
 
