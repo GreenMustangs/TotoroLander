@@ -112,6 +112,7 @@ public class InstructionsPanel extends JPanel implements MouseListener
     String text3 = "Go Downwards Faster";
     String text4 = "Move Totoro Left";
     String text5 = "Move Totoro Right";
+    String text6 = "* Objective: Land Totoro Safely";
     // get metrics from the graphics
     Font font2 = new Font("Monospaced", Font.BOLD, fontSize2);
     FontMetrics metrics2 = g.getFontMetrics(font);
@@ -143,6 +144,10 @@ public class InstructionsPanel extends JPanel implements MouseListener
 	g.setFont(font2);
 	g.setColor(Color.RED);
 	g.drawString(text5, keyX + 150, topOfText2 + 450);
+	
+	g.setFont(font2);
+	g.setColor(Color.ORANGE);
+	g.drawString(text6, keyX, topOfText2 + 600);
 	
 	int wOfButton = 200;
 	int hOfButton = 70;
