@@ -141,7 +141,7 @@ public class TreeBackground extends JPanel implements KeyListener, ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		   
-		   if (totororo.checkEndOfGame()) {
+		   if (!totororo.checkEndOfGame()) {
 			   repaint();
 			   endGame();
 			   
