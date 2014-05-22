@@ -144,16 +144,9 @@ public class TreeBackground extends JPanel implements KeyListener, ActionListene
 		   if (!totororo.checkEndOfGame()) {
 			   repaint();
 			   endGame();
-			   
 		   } 
-		   totororo.fall(null);
-		   
-		
-		   for(int i = 0; i < trees.length; i++)
-	  		{
-	  			// totororo.fall(trees[i]);
-	  			// break;
-	  		}
+ 			totororo.fall(480 * 2 - 100);
+
 		    // MOVE ALL TREES
 		    for(int x = 0; x < trees.length; x++)
 		    {
@@ -162,18 +155,7 @@ public class TreeBackground extends JPanel implements KeyListener, ActionListene
 		    		trees[x].moveByAmount(-4, 0);
 		    	}
 		    }
-		    /* 
-	  	for(int i = 0; i < trees.length; i++)
-	  		{
-	  			if(trees[i] != null)
-	  			{
-	  				totororo.fall(trees[i]);
-	  			}
-	  			else
-	  			{
-
-	  			}
-	  		} */
+		    
 	  		// SHOW THE CHANGE
     		repaint();
 	}
